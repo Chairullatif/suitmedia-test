@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Suitmedia</string>
+    <string name="masukkan_nama">masukkan nama</string>
+    <string name="next">next</string>
+    <string name="nama">Nama \t: %s</string>
+    <string name="gambar_event">Gambar Event</string>
+    <string name="guest">GUEST</string>
+    <string name="event">EVENT</string>
+
+    <string-array name="data_name">
+        <item>Java Jazz Festival</item>
+        <item>We The Fest</item>
+        <item>Soundrenaline</item>
+        <item>Djakarta Warehouse Project</item>
+        <item>Hammersonic</item>
+    </string-array>
+
+    <string-array name="data_date">
+        <item>13 Oktober 2019</item>
+        <item>27 Desember 2019</item>
+        <item>9 Agustus 2020</item>
+        <item>20 Mei 2021</item>
+        <item>4 Juli 2022</item>
+  </string-array>
+
+    <array name="data_photo">
+        <item>@drawable/konser1</item>
+        <item>@drawable/konser2</item>
+        <item>@drawable/konser3</item>
+        <item>@drawable/konser4</item>
+        <item>@drawable/konser5</item>
+    </array>
+
+    <array name="data_photo_guest">
+        <item>@drawable/person1</item>
+        <item>@drawable/person2</item>
+        <item>@drawable/person3</item>
+        <item>@drawable/person4</item>
+        <item>@drawable/person5</item>
+    </array>
+
+</resources>
