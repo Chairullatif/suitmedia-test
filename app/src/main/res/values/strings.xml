@@ -8,6 +8,9 @@
     <string name="event">EVENT</string>
     <string name="selamat_datang">Selamat Datang!</string>
     <string name="sertakan">Sertakan gambar profil Anda\nuntuk melengkapi profil</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Exce</string>
+    <string name="search">Search</string>
+    <string name="plus">Plus</string>
 
     <string-array name="data_name">
         <item>Java Jazz Festival</item>
