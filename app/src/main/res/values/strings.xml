@@ -6,6 +6,8 @@
     <string name="gambar_event">Gambar Event</string>
     <string name="guest">GUEST</string>
     <string name="event">EVENT</string>
+    <string name="selamat_datang">Selamat Datang!</string>
+    <string name="sertakan">Sertakan gambar profil Anda\nuntuk melengkapi profil</string>
 
     <string-array name="data_name">
         <item>Java Jazz Festival</item>
