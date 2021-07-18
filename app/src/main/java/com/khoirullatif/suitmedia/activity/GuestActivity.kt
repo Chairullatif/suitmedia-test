@@ -67,34 +67,10 @@ class GuestActivity : AppCompatActivity() {
                     }
 
                     Log.d("GuestActivity", "guests: ${guests.isEmpty()}")
-                    rvGuest = binding.rvGuest
-                    rvGuest.layoutManager = GridLayoutManager(this@GuestActivity,2)
-                    val gridGuestAdapter = GuestAdapter(guests)
-                    rvGuest.adapter = gridGuestAdapter
 
-                    gridGuestAdapter.setOnItemClickCallback(object : GuestAdapter.OnItemClickCallback {
-                        override fun onItemClicked(data: Guest) {
-                            val resultIntent = Intent()
-                            resultIntent.putExtra(EXTRA_SELECTED_GUEST, data.name)
-                            setResult(RESULT_CODE, resultIntent)
+                    actionAndAdapter(guests)
 
-                            val date = data.birthdate.split("-")[2].toInt()
-                            Log.d("GuestActivity", "onItemClicked: $date")
 
-                            val alert: String = if (date % 2 == 0 && date % 3 == 0) {
-                                "IOS"
-                            } else if (date % 2 == 0) {
-                                "blackberry"
-                            } else if (date % 3 == 0) {
-                                "android"
-                            } else {
-                                "feature phone"
-                            }
-
-                            Toast.makeText(this@GuestActivity, alert, Toast.LENGTH_SHORT).show()
-                            finish()
-                        }
-                    })
                 } catch (e: Exception) {
                     Toast.makeText(this@GuestActivity, e.message, Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
@@ -116,5 +92,49 @@ class GuestActivity : AppCompatActivity() {
                 Toast.makeText(this@GuestActivity, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun actionAndAdapter(listGuest: ArrayList<Guest>) {
+        rvGuest = binding.rvGuest
+        rvGuest.layoutManager = GridLayoutManager(this@GuestActivity,2)
+        val gridGuestAdapter = GuestAdapter(listGuest)
+        rvGuest.adapter = gridGuestAdapter
+
+        gridGuestAdapter.setOnItemClickCallback(object : GuestAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Guest) {
+                val resultIntent = Intent()
+                resultIntent.putExtra(EXTRA_SELECTED_GUEST, data.name)
+                setResult(RESULT_CODE, resultIntent)
+
+                val date = data.birthdate.split("-")[2].toInt()
+                val month = data.birthdate.split("-")[1].toInt()
+                Log.d("GuestActivity", "onItemClicked: $date")
+
+                val alert: String = if (date % 2 == 0 && date % 3 == 0) {
+                    "IOS"
+                } else if (date % 2 == 0) {
+                    "blackberry"
+                } else if (date % 3 == 0) {
+                    "android"
+                } else {
+                    "feature phone"
+                }
+
+                isMonthPrime(month)
+
+                Toast.makeText(this@GuestActivity, alert, Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        })
+    }
+
+    private fun isMonthPrime(mm: Int) : Boolean {
+        return if (mm % 2 == 0) {
+            Log.d("GuestActivity", "isMonthPrime: $mm is not prime")
+            false
+        } else {
+            Log.d("GuestActivity", "isMonthPrime: $mm is prime")
+            true
+        }
     }
 }
