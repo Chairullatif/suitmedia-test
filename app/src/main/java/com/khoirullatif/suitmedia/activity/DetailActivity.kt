@@ -14,7 +14,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     companion object {
         const val EXTRA_NAME = "extra_name"
-        const val EXTRA_GUEST = "extra_guest"
         private const val REQUEST_CODE = 100
         private const val REQUEST_CODE_GUEST = 200
     }
