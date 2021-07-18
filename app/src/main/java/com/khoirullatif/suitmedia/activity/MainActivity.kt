@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             val intent = Intent(this@MainActivity, DetailActivity::class.java)
-            val name = binding.edtName.text.toString()
+            val name = binding.edtName.text.toString().trim()
             intent.putExtra(DetailActivity.EXTRA_NAME, name)
 
             isPalindrome(name)
