@@ -2,13 +2,14 @@ package com.khoirullatif.suitmedia.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.khoirullatif.suitmedia.Guest
+import com.khoirullatif.suitmedia.models.Guest
 import com.khoirullatif.suitmedia.R
 import com.khoirullatif.suitmedia.adapter.GuestAdapter
 import com.khoirullatif.suitmedia.databinding.ActivityGuestBinding
@@ -21,6 +22,7 @@ class GuestActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGuestBinding
     private lateinit var rvGuest: RecyclerView
+    private lateinit var myPreferences: SharedPreferences
     private var guests = ArrayList<Guest>()
 
     companion object {
@@ -33,13 +35,19 @@ class GuestActivity : AppCompatActivity() {
         binding = ActivityGuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        myPreferences = applicationContext.getSharedPreferences("MyPref", MODE_PRIVATE)
+
         getDataGuest()
 
+        binding.pullToRefresh.setOnRefreshListener {
+            getDataGuest()
+        }
     }
 
     private fun getDataGuest() {
         val client = AsyncHttpClient()
         val url = "http://www.mocky.io/v2/596dec7f0f000023032b8017"
+        binding.pullToRefresh.isRefreshing = true
         client.get(url, object : AsyncHttpResponseHandler() {
             @SuppressLint("Recycle")
             override fun onSuccess(
@@ -47,11 +55,12 @@ class GuestActivity : AppCompatActivity() {
                 headers: Array<out Header>?,
                 responseBody: ByteArray?
             ) {
-
+                binding.pullToRefresh.isRefreshing = false
                 val result = String(responseBody!!)
                 try {
                     val jsonArray = JSONArray(result)
 
+                    guests.clear()
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
                         val name = jsonObject.getString("name")
@@ -70,7 +79,6 @@ class GuestActivity : AppCompatActivity() {
 
                     actionAndAdapter(guests)
 
-
                 } catch (e: Exception) {
                     Toast.makeText(this@GuestActivity, e.message, Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
@@ -83,6 +91,7 @@ class GuestActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
+                binding.pullToRefresh.isRefreshing = false
                 val errorMessage = when (statusCode) {
                     401 -> "$statusCode : Bad Request"
                     403 -> "$statusCode : Forbidden"

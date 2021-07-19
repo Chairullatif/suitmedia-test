@@ -1,4 +1,4 @@
-package com.khoirullatif.suitmedia
+package com.khoirullatif.suitmedia.models
 
 data class Guest (
     val name: String,

@@ -26,7 +26,7 @@
         <item>9 Agustus 2020</item>
         <item>20 Mei 2021</item>
         <item>4 Juli 2022</item>
-  </string-array>
+    </string-array>
 
     <array name="data_photo">
         <item>@drawable/konser1</item>
@@ -43,5 +43,7 @@
         <item>@drawable/person4</item>
         <item>@drawable/person5</item>
     </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.khoirullatif.suitmedia.Event
+import com.khoirullatif.suitmedia.models.Event
 import com.khoirullatif.suitmedia.R
 
 class EventAdapter internal constructor(private val context: Context) : BaseAdapter() {
@@ -44,7 +44,6 @@ class EventAdapter internal constructor(private val context: Context) : BaseAdap
         fun bind(event: Event) {
             tvNameEvent.text = event.name
             tvDateEvent.text = event.date
-            //ivPhotoEvent.setImageResource(event.photo)
             Glide.with(context)
                 .load(event.photo)
                 .into(ivPhotoEvent)

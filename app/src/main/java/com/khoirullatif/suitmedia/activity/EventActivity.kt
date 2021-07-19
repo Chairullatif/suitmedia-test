@@ -2,14 +2,21 @@ package com.khoirullatif.suitmedia.activity
 
 import android.content.Intent
 import android.content.res.TypedArray
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
-import com.khoirullatif.suitmedia.Event
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
+import com.khoirullatif.suitmedia.MapFragment
 import com.khoirullatif.suitmedia.R
 import com.khoirullatif.suitmedia.adapter.EventAdapter
 import com.khoirullatif.suitmedia.databinding.ActivityEventBinding
+import com.khoirullatif.suitmedia.models.Event
+
 
 class EventActivity : AppCompatActivity() {
 
@@ -44,6 +51,23 @@ class EventActivity : AppCompatActivity() {
             setResult(RESULT_CODE, resultIntent)
             finish()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.plus_button) {
+            val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+            binding.lvList.visibility = View.INVISIBLE
+            binding.fragmentMap.visibility = View.VISIBLE
+            ft.replace(R.id.fragment_map, MapFragment())
+            ft.commit()
+        }
+        return true
     }
 
     private fun prepare() {

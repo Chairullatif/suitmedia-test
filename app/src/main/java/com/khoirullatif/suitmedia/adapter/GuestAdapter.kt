@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.khoirullatif.suitmedia.Guest
+import com.khoirullatif.suitmedia.models.Guest
 import com.khoirullatif.suitmedia.R
 
-class GuestAdapter(val listGuest: ArrayList<Guest>) : RecyclerView.Adapter<GuestAdapter.GridViewHolder>() {
+class GuestAdapter(private val listGuest: ArrayList<Guest>) : RecyclerView.Adapter<GuestAdapter.GridViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
