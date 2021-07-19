@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
@@ -37,6 +36,9 @@ class EventActivity : AppCompatActivity() {
         binding = ActivityEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
         val listView: ListView = binding.lvList
         adapterEvent = EventAdapter(this)
         listView.adapter = adapterEvent
@@ -54,20 +56,23 @@ class EventActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
+        val inflater = menuInflater
         inflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.plus_button) {
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.plus_button -> {
             val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
             binding.lvList.visibility = View.INVISIBLE
             binding.fragmentMap.visibility = View.VISIBLE
             ft.replace(R.id.fragment_map, MapFragment())
             ft.commit()
+            true
         }
-        return true
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     private fun prepare() {
